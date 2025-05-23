@@ -8,19 +8,44 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Main color */
+  --color-green-08: #3d4435;
+  --color-green-07: #647354;
+  --color-green-06: #819c65;
+  --color-green-05: #a1ca7c;
+  --color-green-04: #b8d899;
+  --color-green-03: #dae7cd;
+  --color-green-02: #ecf3e3;
+  --color-green-01: #f9fbf6;
+
+  /* Neutral color */
+  --color-black: #17171b;
+  --color-neutral-11: #2b2b2b;
+  --color-neutral-10: #3e3e3e;
+  --color-neutral-09: #575757;
+  --color-neutral-08: #757575;
+  --color-neutral-07: #939393;
+  --color-neutral-06: #adadad;
+  --color-neutral-05: #c4c4c4;
+  --color-neutral-04: #d3d3d3;
+  --color-neutral-03: #e5e5e4;
+  --color-neutral-02: #f1f1f1;
+  --color-neutral-01: #f9f9f9;
+  --color-white: #ffffff;
+
+  --color-error: #ff686d;
 }
 
 body {
-  background: var(--background);
+  background: var(--color-neutral-01);
   color: var(--foreground);
   font-family: sans-serif;
 }
 
 @layer components {
   body {
-    @apply flex box-border justify-center;
+    @apply flex flex-1 box-border justify-center text-black;
   }
 
   *:focus {
@@ -32,11 +57,59 @@ body {
   }
 
   .h1 {
-    @apply text-[1.5rem] font-bold leading-5;
+    @apply text-[2rem] font-bold;
   }
 
   .h2 {
-    @apply text-[1.25rem] font-bold leading-5;
+    @apply text-[2rem] font-semibold;
+  }
+
+  .sh1 {
+    @apply text-[1.5rem] font-semibold;
+  }
+
+  .sh2 {
+    @apply text-[1.5rem] font-normal;
+  }
+
+  .sh3 {
+    @apply text-[1.5rem] font-medium;
+  }
+
+  .b1 {
+    @apply text-[1.25rem] font-semibold;
+  }
+
+  .b2 {
+    @apply text-[1.25rem] font-normal;
+  }
+
+  .b3 {
+    @apply text-[1.25rem] font-medium;
+  }
+
+  .b4 {
+    @apply text-[1rem] font-semibold;
+  }
+
+  .b5 {
+    @apply text-[1rem] font-normal;
+  }
+
+  .b5 {
+    @apply text-[1rem] font-medium;
+  }
+
+  .c1 {
+    @apply text-[.875rem] font-bold;
+  }
+
+  .c2 {
+    @apply text-[0.75rem] font-semibold;
+  }
+
+  .c3 {
+    @apply text-[0.75rem] font-medium;
   }
 
   @layer utilities {
