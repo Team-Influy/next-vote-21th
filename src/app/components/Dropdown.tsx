@@ -1,5 +1,5 @@
-import DropdownArrow from "@/assets/ChevronDown.svg";
-import WarningIcon from "@/assets/WarningIcon.svg";
+import DropdownArrow from "@/assets/images/ChevronDown.svg";
+import WarningIcon from "@/assets/images/WarningIcon.svg";
 import cn from "@/utils/cn";
 import { useEffect, useRef } from "react";
 
