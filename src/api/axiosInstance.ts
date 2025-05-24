@@ -1,5 +1,5 @@
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "@/constants/api";
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import { ACCESS_TOKEN_KEY } from "@/constants/api";
+import axios, { AxiosInstance } from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -10,12 +10,12 @@ const getAccessToken = (): string | null => {
   return null;
 };
 
-const getRefreshToken = (): string | null => {
-  if (typeof window !== "undefined") {
-    return localStorage.getItem(REFRESH_TOKEN_KEY);
-  }
-  return null;
-};
+// const getRefreshToken = (): string | null => {
+//   if (typeof window !== "undefined") {
+//     return localStorage.getItem(REFRESH_TOKEN_KEY);
+//   }
+//   return null;
+// };
 
 const createAxiosInstance = (): AxiosInstance => {
   const axiosInstace = axios.create({

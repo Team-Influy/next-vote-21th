@@ -20,7 +20,7 @@ const Login = () => {
     password: "",
   });
 
-  const { isLoggedIn, username, login } = useAuthStore();
+  const { login } = useAuthStore();
   const router = useRouter();
 
   const mutation = useMutation<
