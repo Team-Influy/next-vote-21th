@@ -4,6 +4,7 @@ import Link from "next/link";
 import { User, Menu, SquareX } from "lucide-react";
 import cn from "@/utils/cn";
 import { useState } from "react";
+import { useAuthStore } from "@/store/authStore";
 
 //추후에 경로 추가하기
 const NAVBAR_ITEMS = [
@@ -14,8 +15,19 @@ const NAVBAR_ITEMS = [
 
 const NavBar = () => {
   //추후에 로그인 상태 불러오기
-  const isLoggedIn = true;
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { isLoggedIn, username, login, logout } = useAuthStore();
+
+  const handleLogin = () => {
+    if (!isLoggedIn) {
+      login("한서정");
+    }
+    // 테스트용: 강제로 로그인
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <nav className="fixed top-0 left-0 z-10 flex h-12 w-screen sm:h-16 lg:h-20">
@@ -42,7 +54,7 @@ const NavBar = () => {
                   key={item.key}
                   href={item.destination}
                   className={cn(
-                    "hidden text-sm font-medium text-gray-600 hover:underline",
+                    "hidden text-sm font-medium text-gray-600 hover:underline hover:underline-offset-4",
                     "sm:flex",
                   )}
                 >
@@ -50,9 +62,23 @@ const NavBar = () => {
                 </Link>
               ),
           )}
-          <button className="bg-green-03 text-green-07 flex h-fit w-fit items-center rounded-lg px-3 py-1 sm:px-4 sm:py-2">
+          {isLoggedIn && (
+            <span
+              className={cn(
+                "hidden text-sm font-medium text-gray-600 hover:underline hover:underline-offset-4",
+                "sm:flex",
+              )}
+              onClick={() => handleLogout()}
+            >
+              로그아웃
+            </span>
+          )}
+          <button
+            className="bg-green-03 text-green-07 flex h-fit w-fit cursor-pointer items-center rounded-lg px-3 py-1 sm:px-4 sm:py-2"
+            onClick={handleLogin}
+          >
             <User className="stroke-2.5 mr-1 h-[1rem] sm:h-[1.2rem]" />
-            <span>{isLoggedIn ? "한서정님" : "Login"}</span>
+            <span>{isLoggedIn ? username + "님" : "Login"}</span>
           </button>
         </div>
       </section>
@@ -63,7 +89,7 @@ const NavBar = () => {
           onClick={() => setIsSidebarOpen(false)}
         >
           <div
-            className="bg-green-02 fixed top-12 left-0 flex h-full w-1/3 flex-col space-y-4 p-4 shadow-lg"
+            className="bg-green-02 fixed top-12 left-0 flex h-full w-1/3 flex-col space-y-4 px-4 py-8 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             {NAVBAR_ITEMS.map(
@@ -78,6 +104,14 @@ const NavBar = () => {
                     {item.name}
                   </Link>
                 ),
+            )}
+            {isLoggedIn && (
+              <button
+                className="text-left text-sm font-medium text-gray-600"
+                onClick={() => handleLogout()}
+              >
+                로그아웃
+              </button>
             )}
           </div>
         </div>
