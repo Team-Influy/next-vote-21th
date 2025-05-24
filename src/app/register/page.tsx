@@ -114,9 +114,6 @@ const Register = () => {
         team: formData.team,
         part: formData.part,
       });
-
-      alert("성공");
-      router.push("/login");
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors: {
