@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="flex flex-1">
+    <html lang="ko">
       <body className={`${pretendard.className}`}>{children}</body>
     </html>
   );
