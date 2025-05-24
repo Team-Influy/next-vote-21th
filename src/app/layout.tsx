@@ -14,8 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <NavBar />
-      <body>{children}</body>
+      <body className="pt-12 sm:pt-16 lg:pt-20">
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
