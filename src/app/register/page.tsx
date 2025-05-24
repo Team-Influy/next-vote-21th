@@ -70,14 +70,17 @@ const Register = () => {
   });
 
   const userSchema = z.object({
-    name: z.string().min(1, { message: "이름을 입력해주세요." }),
-    email: z.string().email({ message: "유효한 이메일을 입력해주세요." }),
+    name: z.string().max(10, { message: "이름을 입력해주세요." }),
+    email: z
+      .string()
+      .email({ message: "유효한 이메일을 입력해주세요." })
+      .max(25, {message: "이메일은 25자 이내로 입력해주세요."}),
     password: z
       .string()
-      .min(8, { message: "비밀번호는 8자 이상이어야 합니다." }),
+      .min(8, { message: "비밀번호는 8자 이상 입력해주세요." })
+      .max(100, { message: "비밀번호는 100자 이내로 입력해주세요."}),
     confirmPassword: z
       .string()
-      .min(8, { message: "비밀번호는 8자 이상이어야 합니다." })
       .refine((v) => v === formData.password, {
         message: "비밀번호가 일치하지 않습니다.",
       }),
