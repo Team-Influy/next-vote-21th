@@ -27,7 +27,7 @@ const Input = ({
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="border border-neutral-04 w-full rounded-sm px-2 py-1.5 bg-white focus:border-green-04 placeholder:text-neutral-06"
+        className="border border-neutral-04 w-full rounded-sm px-2 py-1.5 bg-white cursor-text focus:border-green-04 placeholder:text-neutral-06"
         placeholder={placeholder}
         required
       />
