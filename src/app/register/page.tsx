@@ -7,11 +7,35 @@ import z from "zod";
 import { useState } from "react";
 import TEAMS from "@/constants/Teams";
 import PARTS from "@/constants/Parts";
+import { postRegister } from "@/api/postRegister";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 
 const Register = () => {
   const [isTeamDropdownOpen, setIsTeamDropdownOpen] = useState<boolean>(false);
   const [isPartsDropdownOpen, setIsPartsDropdownOpen] =
     useState<boolean>(false);
+  const mutation = useMutation<
+    unknown,
+    Error,
+    {
+      name: string;
+      email: string;
+      password: string;
+      team: string;
+      part: string;
+    }
+  >({
+    mutationFn: postRegister,
+    onSuccess: () => {
+      alert("회원가입 성공");
+      router.push("/login");
+    },
+    onError: () => {
+      alert("회원가입 도중 에러 발생");
+    },
+  });
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -79,10 +103,20 @@ const Register = () => {
     handleChange(key, value);
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     try {
       userSchema.parse(formData);
-      // 제출!!
+
+      mutation.mutate({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        team: formData.team,
+        part: formData.part,
+      });
+
+      alert("성공");
+      router.push("/login");
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors: {
@@ -110,9 +144,9 @@ const Register = () => {
   };
 
   return (
-    <div className="flex w-full h-full items-center flex-col px-8 py-14 gap-3">
+    <div className="flex h-full w-full flex-col items-center gap-3 px-8 py-14">
       <h1 className="h1 text-green-08">Sign Up</h1>
-      <main className="flex w-full flex-col max-w-sm gap-4">
+      <main className="flex w-full max-w-sm flex-col gap-4">
         <Input
           title="Name"
           placeholder="Enter your name"
@@ -178,7 +212,7 @@ const Register = () => {
           <MainButton handleOnClick={handleSignUp} />
           <span className="flex gap-1">
             <span className="text-neutral-08">Already have an account?</span>
-            <button className="text-green-05 cursor-pointer hover:text-green-06">
+            <button className="text-green-05 hover:text-green-06 cursor-pointer">
               Login
             </button>
           </span>
