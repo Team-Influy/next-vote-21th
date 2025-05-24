@@ -5,6 +5,7 @@ import { User, Menu, SquareX } from "lucide-react";
 import cn from "@/utils/cn";
 import { useState } from "react";
 
+//추후에 경로 추가하기
 const NAVBAR_ITEMS = [
   { key: 0, name: "투표 바로가기", destination: "/", isLoginRequired: true },
   { key: 1, name: "결과 바로보기", destination: "/", isLoginRequired: true },
@@ -12,6 +13,7 @@ const NAVBAR_ITEMS = [
 ];
 
 const NavBar = () => {
+  //추후에 로그인 상태 불러오기
   const isLoggedIn = true;
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
