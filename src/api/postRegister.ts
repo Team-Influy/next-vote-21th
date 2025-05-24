@@ -1,4 +1,4 @@
-import { RegisterResponse } from "@/app/\btypes/register.types";
+import { RegisterResponse } from "@/app/types/register.types";
 import { authApi } from "./axiosInstance";
 
 export const postRegister = async (data: {

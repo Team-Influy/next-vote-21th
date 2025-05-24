@@ -8,7 +8,7 @@ import { useAuthStore } from "@/store/authStore";
 import { postLogin } from "@/api/postLogin";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { LoginResponse } from "../\btypes/login.types";
+import { LoginResponse } from "../types/login.types";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",

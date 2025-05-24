@@ -1,5 +1,5 @@
 import { authApi } from "./axiosInstance";
-import { LoginResponse } from "@/app/\btypes/login.types";
+import { LoginResponse } from "@/app/types/login.types";
 
 export const postLogin = async (data: {
   email: string;
