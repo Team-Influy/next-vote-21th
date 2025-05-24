@@ -4,17 +4,9 @@ import MainButton from "@/app/components/MainButton";
 import Input from "@/app/components/Input";
 import Dropdown from "@/app/components/Dropdown";
 import z from "zod";
-import { SetStateAction, useState } from "react";
-
-const TEAMS = [
-  "인플루이",
-  "프로메사",
-  "이어드림",
-  "팝업사이클",
-  "하니홈",
-] as const;
-
-const PARTS = ["Frontend", "Backend"] as const;
+import { useState } from "react";
+import TEAMS from "@/constants/Teams";
+import PARTS from "@/constants/Parts";
 
 const Register = () => {
   const [isTeamDropdownOpen, setIsTeamDropdownOpen] = useState<boolean>(false);
