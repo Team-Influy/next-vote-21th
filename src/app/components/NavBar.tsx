@@ -5,6 +5,7 @@ import { User, Menu, SquareX } from "lucide-react";
 import cn from "@/utils/cn";
 import { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
+import { useRouter } from "next/navigation";
 
 //추후에 경로 추가하기
 const NAVBAR_ITEMS = [
@@ -16,18 +17,13 @@ const NAVBAR_ITEMS = [
 const NavBar = () => {
   //추후에 로그인 상태 불러오기
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { isLoggedIn, username, login, logout } = useAuthStore();
-
-  const handleLogin = () => {
-    if (!isLoggedIn) {
-      login("한서정");
-    }
-    // 테스트용: 강제로 로그인
-  };
+  const { isLoggedIn, username, logout } = useAuthStore();
 
   const handleLogout = () => {
     logout();
   };
+
+  const router = useRouter();
 
   return (
     <nav className="fixed top-0 left-0 z-10 flex h-12 w-screen sm:h-16 lg:h-20">
@@ -75,7 +71,11 @@ const NavBar = () => {
           )}
           <button
             className="bg-green-03 text-green-07 flex h-fit w-fit cursor-pointer items-center rounded-lg px-3 py-1 sm:px-4 sm:py-2"
-            onClick={handleLogin}
+            onClick={() => {
+              if (!isLoggedIn) {
+                router.push("/login");
+              }
+            }}
           >
             <User className="stroke-2.5 mr-1 h-[1rem] sm:h-[1.2rem]" />
             <span>{isLoggedIn ? username + "님" : "Login"}</span>
