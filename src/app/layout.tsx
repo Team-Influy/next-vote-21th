@@ -22,8 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <NavBar />
-      <body className={`${pretendard.className}`}>{children}</body>
+      <body className={`${pretendard.className} pt-12 sm:pt-16 lg:pt-20`}>
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
