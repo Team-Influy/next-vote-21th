@@ -10,6 +10,13 @@ import PARTS from "@/constants/Parts";
 import { postRegister } from "@/api/postRegister";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+
+interface CustomErrorResponse {
+  isSucces: boolean;
+  code: string;
+  message: string;
+}
 
 const Register = () => {
   const [isTeamDropdownOpen, setIsTeamDropdownOpen] = useState<boolean>(false);
@@ -31,8 +38,15 @@ const Register = () => {
       alert("회원가입 성공");
       router.push("/login");
     },
-    onError: () => {
-      alert("회원가입 도중 에러 발생");
+    onError: (error) => {
+      const err = error as AxiosError<CustomErrorResponse>;
+      const code = err?.response?.data?.code;
+        if(code === "USER ALREADY EXISTS") {
+          alert("이미 존재하는 유저입니다.");
+          router.push("/login");
+        } else {
+          alert("회원가입 도중 에러 발생");
+        }
     },
   });
   const router = useRouter();
