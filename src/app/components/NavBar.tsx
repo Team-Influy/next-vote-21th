@@ -17,7 +17,7 @@ const NAVBAR_ITEMS = [
 const NavBar = () => {
   //추후에 로그인 상태 불러오기
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { isLoggedIn, username, login, logout } = useAuthStore();
+  const { isLoggedIn, username, logout } = useAuthStore();
 
   const handleLogout = () => {
     logout();

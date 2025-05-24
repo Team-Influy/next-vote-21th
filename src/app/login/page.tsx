@@ -5,7 +5,10 @@ import { useState } from "react";
 import z from "zod";
 import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
-
+import { postLogin } from "@/api/postLogin";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { LoginResponse } from "../\btypes/login.types";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -18,6 +21,39 @@ const Login = () => {
   });
 
   const { isLoggedIn, username, login } = useAuthStore();
+  const router = useRouter();
+
+  const mutation = useMutation<
+    LoginResponse,
+    Error,
+    {
+      email: string;
+      password: string;
+    }
+  >({
+    mutationFn: postLogin,
+    onSuccess: (data) => {
+      login(
+        data.result.name,
+        data.result.accessToken,
+        data.result.refreshToken,
+      );
+      saveRefreshTokenToLocalStorage(data.result.refreshToken);
+      router.push("/");
+    },
+    onError: () => {
+      setErrors({
+        email: "로그인 정보를 확인해주세요.",
+        password: "로그인 정보를 확인해주세요.",
+      });
+    },
+  });
+
+  const saveRefreshTokenToLocalStorage = (refreshToken: string) => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("REFRESH_TOKEN_KEY", refreshToken);
+    }
+  };
 
   const userSchema = z.object({
     email: z.string().min(1, { message: "로그인 정보를 확인해주세요" }),
@@ -30,20 +66,16 @@ const Login = () => {
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     //값 바뀌면 기존 에러 제거
-    setErrors((prev) => ({
+    setErrors({
       email: "",
       password: "",
-    }));
+    });
   };
 
   const handleLoginClick = () => {
-    console.log("실행");
-    userSchema.parse(formData);
-    console.log("✅ 로그인 데이터 유효:", formData);
     try {
       userSchema.parse(formData);
-      console.log("✅ 로그인 데이터 유효:", formData);
-      // 여기에 로그인 API 요청 추가!
+      mutation.mutate({ email: formData.email, password: formData.password });
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = {
