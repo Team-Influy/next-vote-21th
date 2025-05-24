@@ -10,6 +10,13 @@ import PARTS from "@/constants/Parts";
 import { postRegister } from "@/api/postRegister";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+
+interface CustomErrorResponse {
+  isSucces: boolean;
+  code: string;
+  message: string;
+}
 
 const Register = () => {
   const [isTeamDropdownOpen, setIsTeamDropdownOpen] = useState<boolean>(false);
@@ -31,8 +38,15 @@ const Register = () => {
       alert("회원가입 성공");
       router.push("/login");
     },
-    onError: () => {
-      alert("회원가입 도중 에러 발생");
+    onError: (error) => {
+      const err = error as AxiosError<CustomErrorResponse>;
+      const code = err?.response?.data?.code;
+        if(code === "USER ALREADY EXISTS") {
+          alert("이미 존재하는 유저입니다.");
+          router.push("/login");
+        } else {
+          alert("회원가입 도중 에러 발생");
+        }
     },
   });
   const router = useRouter();
@@ -56,14 +70,17 @@ const Register = () => {
   });
 
   const userSchema = z.object({
-    name: z.string().min(1, { message: "이름을 입력해주세요." }),
-    email: z.string().email({ message: "유효한 이메일을 입력해주세요." }),
+    name: z.string().max(10, { message: "이름을 입력해주세요." }),
+    email: z
+      .string()
+      .email({ message: "유효한 이메일을 입력해주세요." })
+      .max(25, {message: "이메일은 25자 이내로 입력해주세요."}),
     password: z
       .string()
-      .min(8, { message: "비밀번호는 8자 이상이어야 합니다." }),
+      .min(8, { message: "비밀번호는 8자 이상 입력해주세요." })
+      .max(100, { message: "비밀번호는 100자 이내로 입력해주세요."}),
     confirmPassword: z
       .string()
-      .min(8, { message: "비밀번호는 8자 이상이어야 합니다." })
       .refine((v) => v === formData.password, {
         message: "비밀번호가 일치하지 않습니다.",
       }),
