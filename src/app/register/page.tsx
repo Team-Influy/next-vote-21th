@@ -110,7 +110,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-1 justify-center items-center flex-col px-8 py-14 gap-3">
+    <div className="flex w-full h-full items-center flex-col px-8 py-14 gap-3">
       <h1 className="h1 text-green-08">Sign Up</h1>
       <main className="flex w-full flex-col max-w-sm gap-4">
         <Input

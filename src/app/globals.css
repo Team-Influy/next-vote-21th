@@ -45,7 +45,7 @@ body {
 
 @layer components {
   body {
-    @apply flex flex-1 box-border justify-center text-black;
+    @apply flex w-dvw h-dvh box-border justify-center text-black;
   }
 
   *:focus {
