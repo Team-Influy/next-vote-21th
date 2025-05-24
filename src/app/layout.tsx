@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 import "./globals.css";
+import NavBar from "./components/NavBar";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -21,6 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <NavBar />
       <body className={`${pretendard.className}`}>{children}</body>
     </html>
   );
