@@ -46,7 +46,7 @@ const Members = () => {
         {members.map((member) => (
           <div
             key={member.name}
-            className="flex h-[16rem] w-[10rem] flex-col items-center justify-center gap-3 rounded-lg bg-black px-5 py-5 text-white"
+            className="flex h-[14rem] w-[10rem] flex-col items-center justify-center gap-3 rounded-lg bg-black px-5 py-5 text-white"
           >
             <ProfileIcon className="h-15 w-15 text-white" />
             <span className="flex flex-col items-center gap-2 text-center">
