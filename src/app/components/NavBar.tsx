@@ -13,7 +13,7 @@ const NAVBAR_ITEMS = [
   { key: 1, name: "결과 바로보기", destination: "/", isLoginRequired: true },
   {
     key: 2,
-    name: "후보 살펴보기",
+    name: "후보 목록 조회",
     destination: "/members",
     isLoginRequired: false,
   },

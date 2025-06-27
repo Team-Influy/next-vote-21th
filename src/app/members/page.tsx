@@ -13,7 +13,7 @@ const Members = () => {
 
   return (
     <main className="flex h-full w-full flex-col items-center gap-3 px-8 py-14">
-      <h1 className="h1">후보 살펴보기</h1>
+      <h1 className="h1">후보 목록 조회</h1>
       <div className="flex">
         <button
           type="button"
