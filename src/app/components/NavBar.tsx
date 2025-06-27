@@ -11,7 +11,12 @@ import { useRouter } from "next/navigation";
 const NAVBAR_ITEMS = [
   { key: 0, name: "투표 바로가기", destination: "/", isLoginRequired: true },
   { key: 1, name: "결과 바로보기", destination: "/", isLoginRequired: true },
-  { key: 2, name: "후보 살펴보기", destination: "/", isLoginRequired: false },
+  {
+    key: 2,
+    name: "후보 목록 조회",
+    destination: "/members",
+    isLoginRequired: false,
+  },
 ];
 
 const NavBar = () => {
