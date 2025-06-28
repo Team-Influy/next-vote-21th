@@ -29,9 +29,9 @@ export const useVoteLeader = (id: number) => {
   return { ...mutation };
 };
 
-export const useVoteTeam = (id: number) => {
+export const useVoteTeam = (team: string) => {
   const mutation = useMutation({
-    mutationFn: () => postVoteForTeam(id),
+    mutationFn: () => postVoteForTeam(team),
   });
   return { ...mutation };
 };

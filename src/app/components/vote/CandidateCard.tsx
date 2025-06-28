@@ -19,7 +19,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
 }) => {
   const router = useRouter();
   const { mutate: mutateLeader } = useVoteLeader(id);
-  const { mutate: mutateTeam } = useVoteTeam(id);
+  const { mutate: mutateTeam } = useVoteTeam(name);
   const handleVote = () => {
     if (
       window.confirm(

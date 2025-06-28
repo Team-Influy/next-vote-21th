@@ -17,7 +17,7 @@ export const postVoteForLeader = async (id: number) => {
   return response.data.result;
 };
 
-export const postVoteForTeam = async (id: number) => {
-  const response = await getAuthApi().post("/votes/teams", { id });
+export const postVoteForTeam = async (team: string) => {
+  const response = await getAuthApi().post("/votes/teams", { team });
   return response.data.result;
 };
