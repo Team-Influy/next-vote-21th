@@ -1,5 +1,5 @@
 import { RegisterResponse } from "@/app/types/register.types";
-import { authApi } from "./axiosInstance";
+import { getAuthApi } from "./axiosInstance";
 
 export const postRegister = async (data: {
   name: string;
@@ -8,6 +8,6 @@ export const postRegister = async (data: {
   team: string;
   part: string;
 }): Promise<RegisterResponse> => {
-  const response = await authApi.post("/users/sign-up", data);
+  const response = await getAuthApi().post("/users/sign-up", data);
   return response.data.data;
 };
