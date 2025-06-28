@@ -15,12 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-        <body className="pt-12 sm:pt-16 lg:pt-20">
-          <ReactQueryProvider>
-            <NavBar />
-            {children}
-          </ReactQueryProvider>
-        </body>
+      <body className="box-border flex h-full min-h-dvh w-full min-w-[20rem] flex-1 justify-center pt-12 text-black sm:pt-16 lg:pt-20">
+        <ReactQueryProvider>
+          <NavBar />
+          {children}
+        </ReactQueryProvider>
+      </body>
     </html>
   );
 }

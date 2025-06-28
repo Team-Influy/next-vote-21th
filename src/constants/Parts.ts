@@ -1,3 +1,3 @@
-const PARTS = ["Frontend", "Backend"] as const;
+const PARTS = ["FE", "BE"] as const;
 
 export default PARTS;

@@ -62,7 +62,7 @@ export const BACK_MEMBERS: Member[] = [
   {
     name: "이석원",
     univ: "연세대학교",
-    major: "컴퓨터공학과",
+    major: "기계공학과",
   },
   {
     name: "박서연",

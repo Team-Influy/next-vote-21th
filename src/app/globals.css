@@ -51,10 +51,6 @@ body {
 }
 
 @layer components {
-  body {
-    @apply flex w-dvw h-dvh box-border justify-center text-black;
-  }
-
   *:focus {
     outline: none;
   }
