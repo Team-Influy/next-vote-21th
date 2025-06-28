@@ -1,11 +1,11 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
 import { postLogin } from "@/api/postLogin";
-import { useAuthStore, getDecryptedRefreshToken } from "@/store/authStore";
+import { useAuthStore, getRefreshTokenFromStorage } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { LoginResponse } from "@/app/types/login.types";
 import { useState } from "react";
-import { postReissue } from "@/api/refreshToken";
+import { postReissue } from "@/api/postReissue";
 
 export const useLogin = () => {
   const { setAccessToken, setRefreshToken, setUserName } = useAuthStore();
@@ -30,10 +30,6 @@ export const useLogin = () => {
       setRefreshToken(data.result.refreshToken);
       setUserName(data.result.name);
 
-      console.log("로그인 access", data.result.accessToken);
-      console.log("로그인 refresh", data.result.refreshToken);
-      console.log("로그인 이름", data.result.name);
-
       router.push("/");
     },
     onError: () => {
@@ -54,12 +50,12 @@ export const useLogin = () => {
 export const useReissueToken = () => {
   return useMutation({
     mutationFn: async () => {
-      const refreshToken = getDecryptedRefreshToken();
+      const refreshToken = getRefreshTokenFromStorage();
 
       if (!refreshToken) {
         console.warn("No refresh token found");
         useAuthStore.getState().logout();
-        throw new Error("No refresh token");
+        return;
       }
 
       const data = await postReissue(refreshToken);
@@ -68,8 +64,6 @@ export const useReissueToken = () => {
 
       useAuthStore.getState().setAccessToken(accessToken);
       useAuthStore.getState().setRefreshToken(newRefreshToken);
-
-      console.log("✅ 토큰 재발급 성공:", accessToken);
 
       return accessToken;
     },

@@ -42,7 +42,7 @@ const Login = () => {
     },
     onError: () => {
       setErrors({
-        email: "로그인 정보를 확인해주세요.",
+        email: "",
         password: "로그인 정보를 확인해주세요.",
       });
     },

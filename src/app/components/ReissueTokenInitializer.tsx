@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 import { useReissueToken } from "@/hooks/useUser";
-import { getDecryptedRefreshToken, useAuthStore } from "@/store/authStore";
+import { getRefreshTokenFromStorage, useAuthStore } from "@/store/authStore";
 import { usePathname } from "next/navigation";
 
 export default function ReissueTokenInitializer() {
-  const refreshToken = getDecryptedRefreshToken();
+  const refreshToken = getRefreshTokenFromStorage();
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
   const { mutate } = useReissueToken();
   const pathname = usePathname();
