@@ -34,6 +34,16 @@ const Register = () => {
     }
   >({
     mutationFn: postRegister,
+    throwOnError: (error) => {
+      const err = error as AxiosError<CustomErrorResponse>;
+      const code = err?.response?.data?.code;
+
+      // 특정 에러는 컴포넌트에서 처리하고, 나머지는 Error Boundary로 전파
+      if (code === "USER_ALREADY_EXISTS") {
+        return false;
+      }
+      return true;
+    },
     onSuccess: () => {
       alert("회원가입 성공");
       router.push("/login");
@@ -41,12 +51,12 @@ const Register = () => {
     onError: (error) => {
       const err = error as AxiosError<CustomErrorResponse>;
       const code = err?.response?.data?.code;
-        if(code === "USER ALREADY EXISTS") {
-          alert("이미 존재하는 유저입니다.");
-          router.push("/login");
-        } else {
-          alert("회원가입 도중 에러 발생");
-        }
+      if (code === "USER ALREADY EXISTS") {
+        alert("이미 존재하는 유저입니다.");
+        router.push("/login");
+      } else {
+        alert("회원가입 도중 에러 발생");
+      }
     },
   });
   const router = useRouter();
@@ -74,16 +84,14 @@ const Register = () => {
     email: z
       .string()
       .email({ message: "유효한 이메일을 입력해주세요." })
-      .max(25, {message: "이메일은 25자 이내로 입력해주세요."}),
+      .max(25, { message: "이메일은 25자 이내로 입력해주세요." }),
     password: z
       .string()
       .min(8, { message: "비밀번호는 8자 이상 입력해주세요." })
-      .max(100, { message: "비밀번호는 100자 이내로 입력해주세요."}),
-    confirmPassword: z
-      .string()
-      .refine((v) => v === formData.password, {
-        message: "비밀번호가 일치하지 않습니다.",
-      }),
+      .max(100, { message: "비밀번호는 100자 이내로 입력해주세요." }),
+    confirmPassword: z.string().refine((v) => v === formData.password, {
+      message: "비밀번호가 일치하지 않습니다.",
+    }),
     team: z.enum(TEAMS, {
       errorMap: () => ({ message: "팀을 선택해주세요." }),
     }),
