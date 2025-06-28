@@ -1,7 +1,7 @@
 import { ResultResponse } from "@/app/types/result.types";
-import { authApi } from "./axiosInstance";
+import { getAuthApi } from "./axiosInstance";
 
 export const getPartResult = async (part: string): Promise<ResultResponse> => {
-  const response = await authApi.get(`/votes/leaders/${part}/status`);
+  const response = await getAuthApi().get(`/votes/leaders/${part}/status`);
   return response.data;
 };
