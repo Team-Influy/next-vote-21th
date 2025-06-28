@@ -20,7 +20,8 @@ const Login = () => {
     password: "",
   });
 
-  const { login } = useAuthStore();
+  const { setAccessToken, setRefreshToken, setUserName, setIsLoggedIn } =
+    useAuthStore.getState();
   const router = useRouter();
 
   const mutation = useMutation<
@@ -33,12 +34,10 @@ const Login = () => {
   >({
     mutationFn: postLogin,
     onSuccess: (data) => {
-      login(
-        data.result.name,
-        data.result.accessToken,
-        data.result.refreshToken,
-      );
-      saveRefreshTokenToLocalStorage(data.result.refreshToken);
+      setAccessToken(data.result.accessToken);
+      setRefreshToken(data.result.refreshToken);
+      setUserName(data.result.name);
+      setIsLoggedIn(true);
       router.push("/");
     },
     onError: () => {
@@ -48,12 +47,6 @@ const Login = () => {
       });
     },
   });
-
-  const saveRefreshTokenToLocalStorage = (refreshToken: string) => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("REFRESH_TOKEN_KEY", refreshToken);
-    }
-  };
 
   const userSchema = z.object({
     email: z.string().min(1, { message: "로그인 정보를 확인해주세요" }),
