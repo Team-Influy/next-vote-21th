@@ -38,6 +38,7 @@ export const useLogin = () => {
         password: "로그인 정보를 확인해주세요.",
       });
     },
+    throwOnError: true,
   });
 
   return {
@@ -73,5 +74,6 @@ export const useReissueToken = () => {
       useAuthStore.getState().logout();
       window.location.href = "/login";
     },
+    throwOnError: true,
   });
 };
