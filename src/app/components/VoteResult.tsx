@@ -14,12 +14,14 @@ const VoteResult = ({ selectedPart }: { selectedPart: string }) => {
     queryKey: [QUERY_KEYS.RESULT, selectedPart],
     queryFn: () => getDemoResult(),
     enabled: selectedPart === "DEMODAY",
+    throwOnError: true,
   });
 
   const { data: partResult } = useQuery<ResultResponse>({
     queryKey: [QUERY_KEYS.RESULT, selectedPart],
     queryFn: () => getPartResult(selectedPart),
     enabled: selectedPart !== "DEMODAY",
+    throwOnError: true,
   });
 
   const data =
