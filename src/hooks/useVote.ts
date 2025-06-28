@@ -10,6 +10,7 @@ import {
 export const useLeaderCandidates = (part: string) =>
   useQuery({
     queryFn: () => fetchLeaderCandidates(part),
+    throwOnError: true,
     queryKey: ["leaderCandidates", part],
     retry: false,
     enabled: !!part,
@@ -18,6 +19,7 @@ export const useLeaderCandidates = (part: string) =>
 export const useTeamCandidates = () =>
   useQuery({
     queryFn: () => fetchTeamCandidates(),
+    throwOnError: true,
     queryKey: ["teamCandidates"],
     retry: false,
   });
@@ -25,6 +27,7 @@ export const useTeamCandidates = () =>
 export const useVoteLeader = (id: number) => {
   const mutation = useMutation({
     mutationFn: () => postVoteForLeader(id),
+    throwOnError: true,
   });
   return { ...mutation };
 };
@@ -32,6 +35,7 @@ export const useVoteLeader = (id: number) => {
 export const useVoteTeam = (team: string) => {
   const mutation = useMutation({
     mutationFn: () => postVoteForTeam(team),
+    throwOnError: true,
   });
   return { ...mutation };
 };
