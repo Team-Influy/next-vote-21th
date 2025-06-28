@@ -23,6 +23,7 @@ export default function RootLayout({
             <NavBar />
             {children}
           </ClientReissueProvider>
+
         </ReactQueryProvider>
       </body>
     </html>
