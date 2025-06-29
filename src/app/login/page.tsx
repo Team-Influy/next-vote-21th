@@ -86,21 +86,21 @@ const Login = () => {
 
   return (
     <div className="flex h-full w-full flex-col items-center gap-3 px-8 py-14">
-      <h1 className="h1 text-green-08">Log In</h1>
+      <h1 className="h1 text-black">LOGIN</h1>
       <main className="flex w-full max-w-sm flex-col gap-4">
         <Input
-          title="Email"
+          title="이메일"
           type="email"
-          placeholder="Enter your email"
+          placeholder="이메일을 입력해주세요."
           value={formData.email}
           setValue={(value) => handleChange("email", value)}
           isInvalid={!!errors.email}
           errorMessage={errors.email}
         />
         <Input
-          title="Password"
+          title="비밀번호"
           type="password"
-          placeholder="Enter your password"
+          placeholder="비밀번호를 입력해주세요."
           value={formData.password}
           setValue={(value) => handleChange("password", value)}
           isInvalid={!!errors.password}
@@ -109,9 +109,9 @@ const Login = () => {
         <button
           type="button"
           onClick={handleLoginClick}
-          className="bg-green-05 hover:bg-green-06 h-fit w-full cursor-pointer rounded-md px-4 py-2 text-white"
+          className="h-fit w-full cursor-pointer rounded-xs bg-black px-4 py-[.875rem] text-sm text-white"
         >
-          Log In
+          로그인하기
         </button>
         <div className="mt-3 flex w-full items-center">
           <div className="h-px flex-1 bg-gray-300" />
@@ -121,7 +121,7 @@ const Login = () => {
           <span className="text-sm text-gray-600">
             계정이 없으신가요?
             <Link
-              className="ml-3 text-green-600 hover:underline"
+              className="text-main ml-3 hover:font-semibold hover:underline hover:underline-offset-4"
               href={"/register"}
             >
               회원가입 하러가기

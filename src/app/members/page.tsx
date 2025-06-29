@@ -1,6 +1,5 @@
 "use client";
 
-import ProfileIcon from "@/assets/images/ProfileIcon.svg";
 import { BACK_MEMBERS, FRONT_MEMBERS } from "@/constants/Members";
 import PARTS from "@/constants/Parts";
 import cn from "@/utils/cn";
@@ -18,10 +17,10 @@ const Members = () => {
         <button
           type="button"
           className={cn(
-            "sh1 border-black-2 cursor-pointer rounded-l-md border-y-2 border-l-2 border-black px-4 py-2",
+            "sh1 cursor-pointer rounded-l-md border-2 border-black px-4 py-2",
             {
               "bg-black text-white": selectedPart === PARTS[0],
-              "hover:bg-neutral-03 bg-white": selectedPart !== PARTS[0],
+              "bg-white hover:bg-neutral-100": selectedPart !== PARTS[0],
             },
           )}
           onClick={() => setSelectedPart(PARTS[0])}
@@ -31,10 +30,10 @@ const Members = () => {
         <button
           type="button"
           className={cn(
-            "sh1 cursor-pointer rounded-r-md border-y-2 border-r-2 border-black px-4 py-2",
+            "sh1 cursor-pointer rounded-r-md border-2 border-black px-4 py-2",
             {
               "bg-black text-white": selectedPart === PARTS[1],
-              "hover:bg-neutral-03 bg-white": selectedPart !== PARTS[1],
+              "bg-white hover:bg-neutral-100": selectedPart !== PARTS[1],
             },
           )}
           onClick={() => setSelectedPart(PARTS[1])}
@@ -42,24 +41,25 @@ const Members = () => {
           백엔드
         </button>
       </div>
-      <section className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <section className="mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {members.map((member) => (
           <div
             key={member.name}
-            className="flex h-[14rem] w-[10rem] flex-col items-center justify-center gap-3 rounded-lg bg-black px-5 py-5 text-white"
+            className="group relative flex h-[14rem] w-[10rem] flex-col items-center justify-center overflow-hidden rounded-xs border border-black bg-white px-5 py-5 shadow-sm transition duration-300 ease-in-out hover:scale-105 hover:bg-black hover:text-white"
           >
-            <ProfileIcon className="h-15 w-15 text-white" />
-            <span className="flex flex-col items-center gap-2 text-center">
-              <h2 className="sh1 flex w-fit border-b border-white">
-                {member.name}
-              </h2>
-              <p className="flex flex-col">
-                <span className="b4 text-neutral-01 flex break-keep whitespace-break-spaces">
-                  {member.univ}
-                </span>
-                <span className="c3 text-neutral-02">{member.major}</span>
-              </p>
+            {/* 이름 라벨 */}
+            <span className="absolute top-4 left-4 w-full rounded-xs bg-black px-2 py-1 text-xl font-semibold text-white shadow transition duration-300 ease-in-out group-hover:bg-white group-hover:text-black">
+              {member.name}
             </span>
+            {/* 학과/대학 */}
+            <div className="mt-3 flex flex-col items-center gap-1 text-center">
+              <span className="b4 text-neutral-800 transition duration-300 ease-in-out group-hover:text-white">
+                {member.univ}
+              </span>
+              <span className="c3 text-neutral-500 transition duration-300 ease-in-out group-hover:text-neutral-200">
+                {member.major}
+              </span>
+            </div>
           </div>
         ))}
       </section>
