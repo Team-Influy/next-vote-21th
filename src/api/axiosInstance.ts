@@ -34,7 +34,7 @@ function getAuthApi() {
         typeof window !== "undefined"
       ) {
         originalRequest._retry = true;
-        const { setAccessToken, setRefreshToken, logout, setUserName } =
+        const { setAccessToken, setRefreshToken, logout } =
           useAuthStore.getState();
         const refreshToken = getRefreshTokenFromStorage();
         if (refreshToken) {
@@ -47,7 +47,8 @@ function getAuthApi() {
             // 기존 요청에 새 accessToken 적용 후 재시도
             originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
             return authApi!(originalRequest);
-          } catch (e) {
+          } catch (error) {
+            console.error("Reissue failed:", error);
             logout();
           }
         } else {

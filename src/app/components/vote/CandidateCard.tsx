@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useVoteLeader, useVoteTeam } from "@/hooks/useVote";
 
 interface CandidateCardProps {
@@ -14,7 +13,6 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
   description,
   voteType,
 }) => {
-  const router = useRouter();
   const { mutate: mutateLeader } = useVoteLeader(id);
   const { mutate: mutateTeam } = useVoteTeam(name);
   const handleVote = () => {

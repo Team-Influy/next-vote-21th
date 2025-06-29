@@ -1,6 +1,5 @@
 "use client";
 
-import MainButton from "@/app/components/MainButton";
 import Input from "@/app/components/Input";
 import Dropdown from "@/app/components/Dropdown";
 import z from "zod";
