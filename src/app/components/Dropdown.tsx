@@ -45,13 +45,13 @@ const Dropdown = ({
 
   return (
     <div className="flex w-full flex-col gap-1">
-      <h5 className="b4 text-neutral-09">{title}</h5>
+      <h5 className="b4 text-gray-700">{title}</h5>
       <div className="relative inline-block w-full bg-white" ref={dropdownRef}>
         <button
           id="dropdownDefaultButton"
           data-dropdown-toggle="dropdown"
           className={cn(
-            "inline-flex h-fit w-full items-center gap-2 justify-between rounded-sm border border-neutral-04 px-2 py-1.5 text-center cursor-pointer hover:bg-green-01 focus:bg-green-01 focus:border-green-04",
+            "inline-flex h-fit w-full cursor-pointer items-center justify-between gap-2 rounded-xs border border-gray-300 px-2 py-2.5 text-center text-sm placeholder:text-gray-400 focus:border-gray-500",
             {
               "text-neutral-06": !selectedDropdown,
             },
@@ -71,7 +71,7 @@ const Dropdown = ({
         <div
           id="dropdown"
           className={cn(
-            "absolute top-full translate-y-2 z-10 w-full gap-2 rounded-sm border border-green-04 bg-white transition-all duration-150 ease-in-out",
+            "absolute top-full z-10 w-full translate-y-2 gap-2 rounded-xs border border-gray-300 bg-white transition-all duration-150 ease-in-out",
             {
               "pointer-events-none invisible opacity-0": !isDropdownOpen,
             },
@@ -79,13 +79,13 @@ const Dropdown = ({
         >
           <ul
             aria-labelledby="dropdownDefaultButton"
-            className="divide-y divide-green-03"
+            className="divide-y divide-gray-300"
           >
             {dropdownOptions.map((state: string) => (
               <li key={state} onClick={() => handleDropdownClick(state)}>
                 <button
                   type="button"
-                  className="flex w-full cursor-pointer px-2 py-1"
+                  className="flex w-full cursor-pointer px-2 py-2"
                 >
                   {state}
                 </button>
@@ -95,8 +95,8 @@ const Dropdown = ({
         </div>
       </div>
       {isInvalid && (
-        <span className="text-error gap-0.5 flex text-start items-center">
-          <WarningIcon className="w-4 h-4" />
+        <span className="text-error flex items-center gap-0.5 text-start">
+          <WarningIcon className="h-4 w-4" />
           <span className="c2 break-words whitespace-break-spaces">
             {errorMessage || "The format is not valid. Please check."}
           </span>
