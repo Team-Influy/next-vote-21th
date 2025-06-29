@@ -36,7 +36,6 @@ export default function LeaderCandidatesPage() {
               name={c.name}
               description={c.description}
               voteType="leader"
-              part={part}
             />
           ))}
       </div>

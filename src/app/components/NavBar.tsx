@@ -108,7 +108,7 @@ const NavBar = () => {
           onClick={() => setIsSidebarOpen(false)}
         >
           <div
-            className="fixed top-12 left-0 flex h-full w-1/3 flex-col space-y-4 bg-white px-4 py-8 shadow-lg"
+            className="fixed top-10 left-0 flex h-full w-1/3 flex-col space-y-4 bg-white px-4 py-8 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             {NAVBAR_ITEMS.map(

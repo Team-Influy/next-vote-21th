@@ -1,6 +1,5 @@
 import { getDemoResult } from "@/api/getDemoResult";
 import { getPartResult } from "@/api/getPartResult";
-import CrownIcon from "@/assets/images/CrownIcon.svg";
 import { QUERY_KEYS } from "@/constants/api";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -35,7 +34,7 @@ const VoteResult = ({ selectedPart }: { selectedPart: string }) => {
   );
 
   return (
-    <section className="break-words-keep-all mt-6 grid cursor-pointer grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    <section className="break-words-keep-all mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {data?.map((item: PartResultType | DemoDayResultType) => (
         <div
           key={item.id}

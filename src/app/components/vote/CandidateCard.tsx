@@ -1,5 +1,4 @@
 "use client";
-import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useVoteLeader, useVoteTeam } from "@/hooks/useVote";
 
@@ -8,14 +7,12 @@ interface CandidateCardProps {
   name: string;
   description: string;
   voteType: "leader" | "team";
-  part?: string;
 }
 const CandidateCard: React.FC<CandidateCardProps> = ({
   id,
   name,
   description,
   voteType,
-  part,
 }) => {
   const router = useRouter();
   const { mutate: mutateLeader } = useVoteLeader(id);
@@ -30,7 +27,6 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
       else {
         mutateTeam();
       }
-      router.push("/result");
     }
   };
   return (
