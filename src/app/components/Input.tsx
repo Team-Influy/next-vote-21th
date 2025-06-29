@@ -19,7 +19,7 @@ const Input = ({
 }) => {
   return (
     <div className="flex w-full flex-col gap-1">
-      <label htmlFor={title} className="b4 text-neutral-09">
+      <label htmlFor={title} className="b4 text-gray-700">
         {title}
       </label>
       <input
@@ -27,7 +27,7 @@ const Input = ({
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="border-neutral-04 focus:border-green-04 placeholder:text-neutral-06 w-full cursor-text rounded-sm border bg-white px-2 py-1.5"
+        className="w-full cursor-text rounded-xs border border-gray-300 bg-white px-2 py-2.5 text-sm placeholder:text-gray-400 focus:border-gray-500"
         placeholder={placeholder}
         required
       />

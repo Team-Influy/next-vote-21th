@@ -102,7 +102,6 @@ export function useReissueToken() {
     accessToken,
     setAccessToken,
     setRefreshToken,
-    setUserName,
     setIsLoggedIn,
     logout,
   } = useAuthStore();
@@ -115,7 +114,8 @@ export function useReissueToken() {
           setAccessToken(res.result.accessToken);
           setRefreshToken(res.result.refreshToken);
           setIsLoggedIn(true);
-        } catch (e) {
+        } catch (error) {
+          console.error("Reissue failed:", error);
           logout();
         }
       })();

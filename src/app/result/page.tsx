@@ -10,49 +10,41 @@ const Result = () => {
   const [selectedPart, setSelectedPart] = useState<string>(RESULT_LIST[0]);
 
   return (
-    <main className="flex h-full w-full flex-col items-center gap-3 px-8 py-14">
-      <h1 className="h1">{selectedPart} 투표 결과</h1>
-      <div className="flex">
-        <button
-          type="button"
-          className={cn(
-            "b1 md:sh1 cursor-pointer rounded-l-md border-y-2 border-l-2 border-black px-4 py-2",
-            {
-              "bg-black text-white": selectedPart === RESULT_LIST[0],
-              "hover:bg-neutral-03 bg-white": selectedPart !== RESULT_LIST[0],
-            },
-          )}
-          onClick={() => setSelectedPart(RESULT_LIST[0])}
-        >
-          프론트엔드
-        </button>
-        <button
-          type="button"
-          className={cn(
-            "b1 md:sh1 cursor-pointer border-2 border-y-2 border-black px-4 py-2",
-            {
-              "bg-black text-white": selectedPart === RESULT_LIST[1],
-              "hover:bg-neutral-03 bg-white": selectedPart !== RESULT_LIST[1],
-            },
-          )}
-          onClick={() => setSelectedPart(RESULT_LIST[1])}
-        >
-          백엔드
-        </button>
-        <button
-          type="button"
-          className={cn(
-            "b1 md:sh1 cursor-pointer rounded-r-md border-y-2 border-r-2 border-black px-4 py-2",
-            {
-              "bg-black text-white": selectedPart === RESULT_LIST[2],
-              "hover:bg-neutral-03 bg-white": selectedPart !== RESULT_LIST[2],
-            },
-          )}
-          onClick={() => setSelectedPart(RESULT_LIST[2])}
-        >
-          데모데이
-        </button>
+    <main className="flex h-full w-full flex-col items-center justify-start gap-3 self-start px-8 py-14">
+      <h1 className="h1 text-gray-900">
+        {selectedPart === RESULT_LIST[0]
+          ? "프론트엔드"
+          : selectedPart === RESULT_LIST[1]
+            ? "백엔드"
+            : "데모데이"}{" "}
+        투표 결과
+      </h1>
+
+      <div className="flex w-full justify-around border-b border-neutral-200 py-2">
+        {RESULT_LIST.map((part) => (
+          <button
+            key={part}
+            onClick={() => setSelectedPart(part)}
+            className={cn(
+              "flex w-1/3 cursor-pointer flex-col items-center gap-1 px-2 py-1 transition-colors duration-300",
+              selectedPart === part ? "text-[#f43232]" : "text-neutral-500",
+            )}
+          >
+            <span className="c1 font-semibold">
+              {part === RESULT_LIST[0]
+                ? "프론트엔드"
+                : part === RESULT_LIST[1]
+                  ? "백엔드"
+                  : "데모데이"}
+            </span>
+            {/* 선택된 메뉴 underline */}
+            {selectedPart === part && (
+              <span className="bg-main mt-0.5 block h-0.5 w-4 rounded-full" />
+            )}
+          </button>
+        ))}
       </div>
+
       <VoteResult selectedPart={selectedPart} />
     </main>
   );

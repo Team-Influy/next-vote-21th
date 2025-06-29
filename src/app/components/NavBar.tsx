@@ -6,6 +6,8 @@ import cn from "@/utils/cn";
 import { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
+import Influy from "@/assets/images/Influy.svg";
+import { usePathname } from "next/navigation";
 
 //추후에 경로 추가하기
 const NAVBAR_ITEMS = [
@@ -23,6 +25,10 @@ const NavBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { isLoggedIn, username, logout } = useAuthStore();
 
+  const pathname = usePathname();
+  const isVotePage = pathname.startsWith("/vote");
+  const isMembersPage = pathname.startsWith("/members");
+
   const handleLogout = () => {
     logout();
   };
@@ -30,18 +36,22 @@ const NavBar = () => {
   const router = useRouter();
 
   return (
-    <nav className="fixed top-0 left-0 z-10 flex h-12 w-screen sm:h-16 lg:h-20">
+    <nav className="fixed top-0 left-0 z-10 flex h-10 w-screen sm:h-16 lg:h-20">
       {/* 좌측 */}
       <section className="z-1 flex w-full items-center justify-between bg-white px-4 shadow-lg shadow-gray-400/10">
         <div className="flex items-center gap-3">
           <button
-            className="text-gray-500 sm:hidden"
+            className="text-gray-700 sm:hidden"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           >
             {isSidebarOpen ? <SquareX size={20} /> : <Menu size={20} />}
           </button>
-          <Link className="text-[1.25rem] font-bold text-gray-700" href={"/"}>
-            InfluyVote
+          <Link
+            className="flex flex-col text-[1.25rem] font-semibold tracking-wider text-gray-600"
+            href={"/"}
+          >
+            <Influy className="mt-1.5 inline w-fit" />
+            <p className="text-center text-xs">vote</p>
           </Link>
         </div>
 
@@ -54,8 +64,13 @@ const NavBar = () => {
                   key={item.key}
                   href={item.destination}
                   className={cn(
-                    "hidden text-sm font-medium text-gray-600 hover:underline hover:underline-offset-4",
+                    "hover:text-main hidden text-sm font-medium hover:underline hover:underline-offset-4",
                     "sm:flex",
+                    isVotePage && item.name === "투표 바로가기"
+                      ? "text-main"
+                      : isMembersPage && item.name === "후보 목록 조회"
+                        ? "text-main"
+                        : "text-gray-700",
                   )}
                 >
                   {item.name}
@@ -65,7 +80,7 @@ const NavBar = () => {
           {isLoggedIn && (
             <span
               className={cn(
-                "hidden text-sm font-medium text-gray-600 hover:underline hover:underline-offset-4",
+                "hidden text-sm font-medium text-gray-700 hover:underline hover:underline-offset-4",
                 "sm:flex",
               )}
               onClick={() => handleLogout()}
@@ -74,15 +89,15 @@ const NavBar = () => {
             </span>
           )}
           <button
-            className="bg-green-03 text-green-07 flex h-fit w-fit cursor-pointer items-center rounded-lg px-3 py-1 sm:px-4 sm:py-2"
+            className="flex h-fit w-fit cursor-pointer items-center rounded-[.125rem] border-1 border-gray-500 bg-white px-2.5 py-1 text-sm font-medium text-gray-700 sm:px-3 sm:py-1.75"
             onClick={() => {
               if (!isLoggedIn) {
                 router.push("/login");
               }
             }}
           >
-            <User className="stroke-2.5 mr-1 h-[1rem] sm:h-[1.2rem]" />
-            <span>{isLoggedIn ? username + "님" : "Login"}</span>
+            <User className="stroke-2.5 mr-1 h-[.875rem] sm:h-[1rem]" />
+            <span>{isLoggedIn ? username + "님" : "로그인"}</span>
           </button>
         </div>
       </section>
@@ -93,7 +108,7 @@ const NavBar = () => {
           onClick={() => setIsSidebarOpen(false)}
         >
           <div
-            className="bg-green-02 fixed top-12 left-0 flex h-full w-1/3 flex-col space-y-4 px-4 py-8 shadow-lg"
+            className="fixed top-10 left-0 flex h-full w-1/3 flex-col space-y-4 bg-white px-4 py-8 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             {NAVBAR_ITEMS.map(
@@ -102,7 +117,7 @@ const NavBar = () => {
                   <Link
                     key={item.key}
                     href={item.destination}
-                    className="text-sm font-medium text-gray-600"
+                    className="hover:text-main text-sm font-medium text-gray-700 hover:underline hover:underline-offset-4"
                     onClick={() => setIsSidebarOpen(false)}
                   >
                     {item.name}
@@ -111,7 +126,7 @@ const NavBar = () => {
             )}
             {isLoggedIn && (
               <button
-                className="text-left text-sm font-medium text-gray-600"
+                className="hover:text-main text-left text-sm font-medium text-gray-700 hover:underline hover:underline-offset-4"
                 onClick={() => handleLogout()}
               >
                 로그아웃
