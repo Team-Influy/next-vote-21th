@@ -6,7 +6,7 @@ import cn from "@/utils/cn";
 import { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
-import Influy from "@/assets/images/Influy.svg";
+import Influy from "@/assets/images/INFLUY.svg";
 import { usePathname } from "next/navigation";
 
 //추후에 경로 추가하기

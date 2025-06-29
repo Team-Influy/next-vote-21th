@@ -10,7 +10,7 @@ import { postRegister } from "@/api/postRegister";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import Influy from "@/assets/images/Influy.svg";
+import Influy from "@/assets/images/INFLUY.svg";
 import Link from "next/link";
 
 interface CustomErrorResponse {

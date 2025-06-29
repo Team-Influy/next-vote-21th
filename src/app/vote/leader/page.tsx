@@ -1,5 +1,5 @@
 "use client";
-import Influy from "@/assets/images/Influy.svg";
+import Influy from "@/assets/images/INFLUY.svg";
 import Link from "next/link";
 
 export default function VotePartCategoryPage() {

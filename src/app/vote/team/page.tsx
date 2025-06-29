@@ -1,5 +1,5 @@
 "use client";
-import Influy from "@/assets/images/Influy.svg";
+import Influy from "@/assets/images/INFLUY.svg";
 import CandidateCard from "@/app/components/vote/CandidateCard";
 import { useTeamCandidates } from "@/hooks/useVote";
 
