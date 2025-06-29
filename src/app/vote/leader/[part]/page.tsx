@@ -1,7 +1,6 @@
 "use client";
 import Influy from "@/assets/images/Influy.svg";
 import CandidateCard from "@/app/components/vote/CandidateCard";
-import PageTitle from "@/app/components/vote/PageTitle";
 import { useLeaderCandidates } from "@/hooks/useVote";
 import { usePathname } from "next/navigation";
 

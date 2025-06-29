@@ -13,7 +13,7 @@ export default function TeamCandidatesPage() {
         <span className="text-md font-semibold tracking-wider text-gray-700">
           데모데이 팀 투표
         </span>
-      </div>{" "}
+      </div>
       <div className="grid w-9/12 grid-cols-1 gap-6 px-4 md:grid-cols-2">
         {candidates &&
           candidates.map((c) => (

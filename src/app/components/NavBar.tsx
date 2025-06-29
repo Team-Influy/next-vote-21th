@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import Influy from "@/assets/images/Influy.svg";
+import { usePathname } from "next/navigation";
 
 //추후에 경로 추가하기
 const NAVBAR_ITEMS = [
@@ -23,6 +24,10 @@ const NavBar = () => {
   //추후에 로그인 상태 불러오기
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { isLoggedIn, username, logout } = useAuthStore();
+
+  const pathname = usePathname();
+  const isVotePage = pathname.startsWith("/vote");
+  const isMembersPage = pathname.startsWith("/members");
 
   const handleLogout = () => {
     logout();
@@ -59,8 +64,13 @@ const NavBar = () => {
                   key={item.key}
                   href={item.destination}
                   className={cn(
-                    "hover:text-main hidden text-sm font-medium text-gray-700 hover:underline hover:underline-offset-4",
+                    "hover:text-main hidden text-sm font-medium hover:underline hover:underline-offset-4",
                     "sm:flex",
+                    isVotePage && item.name === "투표 바로가기"
+                      ? "text-main"
+                      : isMembersPage && item.name === "후보 목록 조회"
+                        ? "text-main"
+                        : "text-gray-700",
                   )}
                 >
                   {item.name}
