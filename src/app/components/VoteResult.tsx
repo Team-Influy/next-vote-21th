@@ -8,6 +8,7 @@ import {
   PartResultType,
   ResultResponse,
 } from "@/app/types/result.types";
+import cn from "@/utils/cn";
 
 const VoteResult = ({ selectedPart }: { selectedPart: string }) => {
   const { data: demoResult } = useQuery<ResultResponse>({
@@ -34,19 +35,20 @@ const VoteResult = ({ selectedPart }: { selectedPart: string }) => {
   );
 
   return (
-    <section className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    <section className="break-words-keep-all mt-6 grid cursor-pointer grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {data?.map((item: PartResultType | DemoDayResultType) => (
         <div
           key={item.id}
-          className="relative flex h-[14rem] w-[10rem] flex-col items-center justify-center gap-3 rounded-lg bg-black px-5 py-5 text-white"
+          className={cn(
+            "relative flex h-[14rem] w-[10rem] flex-col items-center justify-center overflow-hidden rounded-xs border border-black bg-black px-5 py-5 shadow-sm hover:shadow-lg",
+            maxVote !== 0 &&
+              ("numVotes" in item ? item?.numVotes : item?.voteNum) ===
+                maxVote &&
+              "bg-gradient-to-b from-black to-[#712527]",
+          )}
         >
-          {maxVote !== 0 &&
-            ("numVotes" in item ? item?.numVotes : item?.voteNum) ===
-              maxVote && (
-              <CrownIcon className="absolute top-3 left-3 h-10 w-10 -rotate-[20deg] text-[#ffdb69]" />
-            )}
-          <span className="flex flex-col items-center gap-2 text-center">
-            <h2 className="sh1 flex w-fit border-b border-white">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <h2 className="sh1 flex w-fit border-b border-white text-white">
               {"name" in item ? item?.name : item?.team}
             </h2>
             <span className="b4 text-neutral-02">
@@ -55,7 +57,7 @@ const VoteResult = ({ selectedPart }: { selectedPart: string }) => {
             <span className="c3 text-neutral-03 absolute right-3 bottom-2">
               득표율: {item?.ratioVotes}%
             </span>
-          </span>
+          </div>
         </div>
       ))}
     </section>
